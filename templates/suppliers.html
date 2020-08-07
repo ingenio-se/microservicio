@@ -1,0 +1,106 @@
+</html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>Market suppliers</title>
+
+    <script>
+        function save(){
+            document.getElementById('action').value="save";
+            document.getElementById('form2').submit();
+        }
+        function erase(){
+            document.getElementById('action').value="delete";
+            document.getElementById('form2').submit();
+        }
+    </script>
+  </head>
+  <body>
+    <br>
+    
+    <div class="row text-centered mg-5">
+        <div class="col-6 offset-sm-2">
+            <form action="/suppliers" method="post">
+            <div class="card">
+                <div class="card-header">Create supplier</div>
+                <div class="card-body">
+                    <div class="form-group>">
+                        Name<input type="text" class="form-control" id="name" name="name">      
+                    </div>
+                    <div class="form-group>">
+                        City<select name="city" class="form-control">  
+                            {% for item in Cities %}
+                                <option value="{{ item['id'] }}">{{ item['city'] }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success">Save</button>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+    <div class="row text-centered mg-5">
+        <div class="col-6 offset-sm-2">
+            <form action="/changeSuppliers" id="form2" method="post">
+                <input type="hidden" value="" id="action" name="action">
+            <div class="card">
+                <div class="card-header">Edit supplier</div>
+                <div class="card-body">
+                    <div class="form-group>">
+                        <select class="form-control" id="supplier" name="supplier" >
+                            <option value="">-----</option>
+                            {% for item in Suppliers %}
+                                <option value="{{ item['id'] }}">{{ item['name'] }}</option>
+                            {% endfor %}
+                        </select>
+                        New Name<input type="text" class="form-control" id="name" name="name">
+                        New City<select name="city" class="form-control">  
+                            {% for item in Cities %}
+                                <option value="{{ item['id'] }}">{{ item['city'] }}</option>
+                            {% endfor %}
+                        </select>
+                        <button type="button" onclick="save()" class="btn btn-success">Save</button>
+                        <button type="button" onclick="erase()" class="btn btn-danger">Delete</button>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+    <div class="row text-centered">
+        <div class="col-6 offset-sm-2">
+
+            <table class="table table-bordered">
+                <tr class="table-primary">
+                <td>LIST OF SUPPLIERS</td>
+            
+                </tr>
+                <tr>
+                    <td>Name</td>
+                    <td>City</td>
+                </tr>
+            {% for item in Suppliers %}
+                <tr>
+                <td>{{  item['name'] }}</td>     
+                <td>{{  item['city'] }}</td>  
+                </tr>
+            {% endfor %}
+            </table>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  </body>
+</html>
